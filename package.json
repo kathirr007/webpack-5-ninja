@@ -25,6 +25,7 @@
     "declaration-bundler-webpack-plugin": "^1.0.3",
     "eslint": "^8.46.0",
     "lint-staged": "^13.2.3",
+    "sass": "^1.64.2",
     "sass-loader": "^13.3.2",
     "simple-git-hooks": "^2.9.0",
     "style-loader": "^3.3.3",

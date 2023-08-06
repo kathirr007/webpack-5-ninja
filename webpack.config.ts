@@ -15,6 +15,22 @@ const config: webpack.Configuration = {
         use: 'ts-loader',
         exclude: /node_modules/,
       },
+      {
+        test: /\.(css)$/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader', options: { modules: true } },
+        ],
+        // use: ['style-loader', 'css-loader'], // loaders executed from right to left
+      },
+      {
+        test: /\.s[ac]ss$/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader', options: { modules: true } },
+          { loader: 'sass-loader' },
+        ],
+      },
     ],
   },
   resolve: {

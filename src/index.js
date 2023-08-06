@@ -1,25 +1,33 @@
-import _ from 'lodash'
-import style from './index.css'
-import './clearButton'
-import logo from './assets/images/webpack_logo.png'
-import './assets/fonts/Redressed-Regular.ttf'
+import _ from "lodash";
+import newArrivalData from "./newArrival.json";
 
-const btn1 = document.getElementById('button1')
-const logoEl = document.getElementById('logo')
+function renderItems(itemArr) {
+  const cakeContainerEl = document.getElementById("cakesContainer");
+  cakeContainerEl.innerHTML = ``;
+  _.forEach(itemArr, (item) => {
+    let cakeEl = document.createElement("div");
+    cakeEl.classList.add("cakes-container");
+    cakeEl.innerHTML = `
+    <img src="./assets/${item.imgName}" />
+    <strong>${item.title}</strong>
+    <span>${item.price}</span>
+    `;
+    cakeContainerEl.appendChild(cakeEl);
+  });
+}
 
-btn1.addEventListener('click', () => {
-  const el = document.getElementById('header')
-  el.innerHTML = 'Hey i have updated the code !'
-  el.classList.add([style.header])
+document
+  .getElementById("categorySelect")
+  .addEventListener("change", function (e) {
+    const selected = e.target.value;
+    if (selected === "all") {
+      renderItems(newArrivalData);
+    } else {
+      let filteredData = _.filter(newArrivalData, function (item) {
+        return item.category === selected;
+      });
+      renderItems(filteredData);
+    }
+  });
 
-  const listItems = ['Apple', 'orange', 'Banana']
-  const ul = document.getElementById('shoppingList')
-  _.forEach(listItems, (item) => {
-    const tempEl = document.createElement('li')
-    tempEl.innerHTML = item
-    ul.appendChild(tempEl)
-  })
-})
-
-btn1.classList.add([style.button])
-logoEl.src = logo
+renderItems(newArrivalData);

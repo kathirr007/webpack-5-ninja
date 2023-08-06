@@ -7,7 +7,10 @@ import 'webpack-dev-server'
 
 const config: webpack.Configuration = {
   mode: 'production',
-  entry: './src/index.js',
+  entry: {
+    index: './src/index.js',
+    product: './src/product.js',
+  },
   devtool: 'inline-source-map',
   module: {
     rules: [
@@ -46,7 +49,7 @@ const config: webpack.Configuration = {
     extensions: ['.tsx', '.ts', '.js'],
   },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
     // assetModuleFilename: 'images/[hash][ext]',
     assetModuleFilename: (pathData: PathData) /** function to keep the original file name */ => {

@@ -1,12 +1,12 @@
-import products from "./products.json";
-import _ from "lodash";
+import _ from 'lodash'
+import products from './products.json'
 
 function renderProducts() {
-  const el = document.getElementById("main");
-  let renderedItems = [];
+  const el = document.getElementById('main')
+  const renderedItems = []
 
   _.forEach(products, (item) => {
-    let bakeryEl = document.createElement("div");
+    const bakeryEl = document.createElement('div')
     bakeryEl.innerHTML = `
     <div class="card-container">
     <div class="card u-clearfix">
@@ -23,13 +23,13 @@ function renderProducts() {
       <img src="./assets/${item.imageName}" alt="" class="card-media" />
     </div>
     <div class="card-shadow"></div>
-  </div>`;
-    renderedItems.push(bakeryEl);
-  });
+  </div>`
+    renderedItems.push(bakeryEl)
+  })
 
   _.forEach(renderedItems, (item) => {
-    el.appendChild(item);
-  });
+    el.appendChild(item)
+  })
 }
 
-renderProducts();
+renderProducts()

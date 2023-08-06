@@ -1,6 +1,7 @@
 import path from 'node:path'
 import type webpack from 'webpack'
 import type { PathData } from 'webpack'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
 
 // in case you run into any typescript error when configuring `devServer`
 import 'webpack-dev-server'
@@ -9,9 +10,27 @@ const config: webpack.Configuration = {
   mode: 'production',
   entry: {
     index: './src/index.js',
-    product: './src/product.js',
+    product: './src/products.js',
   },
   devtool: 'inline-source-map',
+  devServer: {
+    static: './dist',
+    port: 3100,
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, './src/index.html'),
+      chunks: ['index'],
+      inject: true,
+      filename: 'index.html',
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, './src/products.html'),
+      chunks: ['product'],
+      inject: true,
+      filename: 'products.html',
+    }),
+  ],
   module: {
     rules: [
       {
